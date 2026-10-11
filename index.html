@@ -984,39 +984,70 @@ body {
 .btn-light:hover {
   background: #f3e6c8;
 }
-/* ===== Lead form ===== */
-.lead {
-  scroll-margin-top: 90px;
-  background: #fff;
-  padding: 90px 0;
+/* ===== Hero with lead form ===== */
+.hero {
+  align-items: flex-start;
+  padding-top: 116px;
 }
-.lead__grid {
-  display: grid;
-  grid-template-columns: 0.42fr 1fr;
-  gap: 32px;
-  align-items: stretch;
-  max-width: 900px;
+.hero .hero-badge {
+  margin-bottom: 1rem;
 }
-.lead__visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 22px;
+.hero-form .lead-form__grid {
+  gap: 10px 16px;
 }
-.lead__card .eyebrow {
-  margin-bottom: 0.4rem;
+.hero-form .field span {
+  margin-bottom: 4px;
+}
+.hero-form .lead-form__submit {
+  margin-top: 14px;
+}
+.hero-grid {
+  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-areas:
+    "visual copy"
+    "stats  copy";
+  gap: 28px 56px;
+  align-items: start;
+}
+.hero-visual {
+  grid-area: visual;
+}
+.hero-copy {
+  grid-area: copy;
+}
+.hero-grid > .hero-stats {
+  grid-area: stats;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 0;
+  padding-top: 1.4rem;
+}
+.hero-counter {
+  left: auto;
+  right: -34px;
+}
+.hero-copy .heading-xl {
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+}
+.hero-form {
+  scroll-margin-top: 100px;
+  margin-top: 1.2rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 1.6rem 1.6rem 1.4rem;
+  box-shadow: 0 30px 60px -34px rgb(24 26 31 / 0.35);
 }
 .lead__title {
   font-family: var(--font-head);
   font-weight: 600;
-  font-size: clamp(1.6rem, 2.8vw, 2rem);
-  line-height: 1.15;
+  font-size: clamp(1.35rem, 2.2vw, 1.6rem);
+  line-height: 1.2;
   color: var(--orange);
 }
 .lead__sub {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   color: var(--muted);
-  margin: 0.6rem 0 1.3rem;
+  margin: 0.35rem 0 1.1rem;
 }
 .lead-form__grid {
   display: grid;
@@ -1077,16 +1108,25 @@ body {
   opacity: 0.7;
   cursor: wait;
 }
-@media (max-width: 720px) {
-  .lead {
-    padding: 64px 0;
+@media (max-width: 1080px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "visual"
+      "copy"
+      "stats";
   }
-  .lead__grid,
+  .hero-grid > .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: none;
+  }
+}
+@media (max-width: 720px) {
+  .hero-form {
+    padding: 1.3rem 1.1rem 1.2rem;
+  }
   .lead-form__grid {
     grid-template-columns: 1fr;
-  }
-  .lead__visual img {
-    height: 260px;
   }
 }
 
@@ -1174,36 +1214,6 @@ body {
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="container hero-grid">
-    <div class="hero-copy">
-      <div class="hero-badge reveal">
-        <i class="fa-solid fa-spa"></i> Franchise Opportunity | Open Across India
-      </div>
-      <h1 class="heading-xl reveal">
-        Own a <em>Carlton</em><br>
-        Wellness <em>Salon Franchise</em>
-      </h1>
-      <p class="lede reveal" style="text-transform:uppercase; letter-spacing:0.04em; font-size:0.95rem; font-weight:600; color:var(--muted); margin-top:1.4rem;">
-        Partner-Funded. Company-Operated. Carlton-Standardised.
-      </p>
-      <p class="lede reveal" style="margin-top:1rem;">
-        Bring India&rsquo;s first premium wellness-led salon chain to your city. You contribute the capital, Carlton operates, customers trust.
-      </p>
-      <div class="hero-actions reveal">
-        <button class="btn" data-go-form>
-          <i class="fa-solid fa-calendar-check"></i> Schedule a Franchise Consultation
-        </button>
-        <a href="#apply" class="btn btn-ghost" data-go-form>
-          <i class="fa-solid fa-file-lines"></i> Get Franchise Details
-        </a>
-      </div>
-      <div class="hero-stats reveal">
-        <div class="stat"><b>~₹1 Cr</b><span>Capital Contribution from</span></div>
-        <div class="stat"><b>₹2L</b><span>Monthly Minimum Payout Protection*</span></div>
-        <div class="stat"><b>2</b><span>Salon Formats</span></div>
-        <div class="stat"><b>311</b><span>Cities in Rollout Plan</span></div>
-      </div>
-    </div>
-
     <div class="hero-visual reveal">
       <img src="images/brand-ambassador.jpg" alt="Mrunal Thakur, Brand Ambassador, Carlton Wellness Group" />
       <div class="hero-counter">
@@ -1212,8 +1222,93 @@ body {
       </div>
       <div class="hero-visual__tag">
         <i class="fa-solid fa-star"></i>
-<span><strong>Mrunal Thakur</strong> · Brand Ambassador</span>
+        <span><strong>Mrunal Thakur</strong> · Brand Ambassador</span>
       </div>
+    </div>
+
+    <div class="hero-copy">
+      <div class="hero-badge reveal">
+        <i class="fa-solid fa-spa"></i> Franchise Opportunity | Open Across India
+      </div>
+      <h1 class="heading-xl reveal">
+        Own a <em>Carlton</em> Wellness <em>Salon Franchise</em>
+      </h1>
+      <p class="lede reveal" style="text-transform:uppercase; letter-spacing:0.04em; font-size:0.9rem; font-weight:600; color:var(--muted); margin-top:1rem;">
+        Partner-Funded. Company-Operated. Carlton-Standardised.
+      </p>
+
+      <div class="hero-form" id="apply">
+        <h2 class="lead__title">Apply for a Carlton Franchise</h2>
+        <p class="lead__sub">Fill in your details and a Carlton franchise advisor will reach out within 24 hours.</p>
+        <form class="lead-form" id="leadForm" novalidate>
+          <div class="lead-form__grid">
+            <label class="field">
+              <span>Full name *</span>
+              <input type="text" name="name" placeholder="Your full name" autocomplete="name" required />
+            </label>
+            <label class="field">
+              <span>Phone number *</span>
+              <input type="tel" name="phone" placeholder="+91 00000 00000" autocomplete="tel" pattern="[+0-9\s\-]{10,15}" required />
+            </label>
+            <label class="field">
+              <span>Email address *</span>
+              <input type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+            </label>
+            <label class="field">
+              <span>City / State</span>
+              <input type="text" name="city" placeholder="e.g. Hyderabad, Telangana" />
+            </label>
+            <label class="field">
+              <span>Capital contribution range</span>
+              <select name="capital_contribution">
+                <option value="">Select range</option>
+                <option>₹1 Cr – ₹1.5 Cr</option>
+                <option>₹1.5 Cr – ₹2 Cr</option>
+                <option>₹2 Cr+</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Preferred format</span>
+              <select name="format">
+                <option value="">Select format</option>
+                <option>Signature Salon (~₹1.0 Cr)</option>
+                <option>Grande Salon (~₹1.5 Cr)</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Timeline to start</span>
+              <select name="timeline">
+                <option value="">Select timeline</option>
+                <option>Immediately</option>
+                <option>Within 3 months</option>
+                <option>3–6 months</option>
+                <option>6+ months</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Business background</span>
+              <select name="background">
+                <option value="">Select background</option>
+                <option>Business owner</option>
+                <option>Salon / beauty industry</option>
+                <option>Working professional</option>
+                <option>Existing franchise Business Partner</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+          <p class="lead-form__error" id="leadError" hidden></p>
+          <button type="submit" class="btn lead-form__submit">Submit application <i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="hero-stats reveal">
+      <div class="stat"><b>~₹1 Cr</b><span>Capital Contribution from</span></div>
+      <div class="stat"><b>₹2L</b><span>Monthly Minimum Payout Protection*</span></div>
+      <div class="stat"><b>2</b><span>Salon Formats</span></div>
+      <div class="stat"><b>311</b><span>Cities in Rollout Plan</span></div>
     </div>
   </div>
 </section>
@@ -1416,82 +1511,6 @@ body {
   </div>
 </section>
 
-<!-- ============ LEAD FORM ============ -->
-<section class="lead" id="apply">
-  <div class="container lead__grid">
-    <div class="lead__visual reveal">
-      <img src="images/salon-interior.jpg" alt="Inside a Carlton Wellness Salon" />
-    </div>
-    <div class="lead__card reveal">
-      <p class="eyebrow">Get Started</p>
-      <h2 class="lead__title">Apply for a Carlton Franchise</h2>
-      <p class="lead__sub">Fill in your details and a Carlton franchise advisor will reach out within 24 hours.</p>
-
-      <form class="lead-form" id="leadForm" novalidate>
-        <div class="lead-form__grid">
-          <label class="field">
-            <span>Full name *</span>
-            <input type="text" name="name" placeholder="Your full name" autocomplete="name" required />
-          </label>
-          <label class="field">
-            <span>Phone number *</span>
-            <input type="tel" name="phone" placeholder="+91 00000 00000" autocomplete="tel" pattern="[+0-9\s\-]{10,15}" required />
-          </label>
-          <label class="field">
-            <span>Email address *</span>
-            <input type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
-          </label>
-          <label class="field">
-            <span>City / State</span>
-            <input type="text" name="city" placeholder="e.g. Hyderabad, Telangana" />
-          </label>
-          <label class="field">
-            <span>Capital contribution range</span>
-            <select name="capital_contribution">
-              <option value="">Select range</option>
-              <option>₹1 Cr – ₹1.5 Cr</option>
-              <option>₹1.5 Cr – ₹2 Cr</option>
-              <option>₹2 Cr+</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Preferred format</span>
-            <select name="format">
-              <option value="">Select format</option>
-              <option>Signature Salon (~₹1.0 Cr)</option>
-              <option>Grande Salon (~₹1.5 Cr)</option>
-              <option>Not sure yet</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Timeline to start</span>
-            <select name="timeline">
-              <option value="">Select timeline</option>
-              <option>Immediately</option>
-              <option>Within 3 months</option>
-              <option>3–6 months</option>
-              <option>6+ months</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Business background</span>
-            <select name="background">
-              <option value="">Select background</option>
-              <option>Business owner</option>
-              <option>Salon / beauty industry</option>
-              <option>Working professional</option>
-              <option>Existing franchise Business Partner</option>
-              <option>Other</option>
-            </select>
-          </label>
-        </div>
-        <p class="lead-form__error" id="leadError" hidden></p>
-        <button type="submit" class="btn lead-form__submit">Submit application <i class="fa-solid fa-arrow-right"></i></button>
-      </form>
-    </div>
-  </div>
-</section>
-
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
   <div class="container site-footer__inner">
@@ -1645,7 +1664,6 @@ body {
           .fromTo(".hero-badge", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55 })
           .fromTo(".hero h1", { autoAlpha: 0, y: 22 }, { autoAlpha: 1, y: 0, duration: 0.65 }, "-=0.35")
           .fromTo(".hero .lede", { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.55 }, "-=0.4")
-          .fromTo(".hero-actions", { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.5 }, "-=0.35")
           .fromTo(".hero-stats", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.5 }, "-=0.3")
           .fromTo(".hero-visual", { autoAlpha: 0, x: 24 }, { autoAlpha: 1, x: 0, duration: 0.7 }, "-=0.9");
 
