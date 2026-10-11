@@ -15,6 +15,19 @@ This refreshes:
 - `release/frontend`: the static landing page and thank-you page
 - `release/backend`: the lead API, its database migrations and the PM2 file (no `node_modules`, no `.env`)
 
+## Vercel
+
+Vercel needs no build step: `vercel.json` serves `frontend/` as the site and runs the backend as a serverless function at `/api/*` (`api/index.js`).
+
+1. Import the GitHub repo in Vercel. Leave **Root Directory** as the repo root and **Framework Preset** as "Other"; `vercel.json` sets the rest.
+2. Add a database. Vercel's disk is temporary, so SQLite won't work here: until a database is connected, the form shows "temporarily unavailable" instead of losing leads.
+   - Easiest: **Storage → Create Database → Neon (Postgres)** and connect it to the project. This adds `DATABASE_URL` / `POSTGRES_URL` automatically.
+   - Or add your own `DATABASE_URL` under **Settings → Environment Variables** (`postgres://...` or `mysql://...`).
+3. Redeploy. The `leads` table is created automatically on the first request.
+4. Check `https://your-project.vercel.app/api/health` returns `{"ok":true,"database":"connected"}`, then submit a test lead.
+
+Node.js is pinned to 22.x in `package.json`.
+
 ## 2a. Linux server (VPS / cloud: AWS, DigitalOcean, Hostinger VPS)
 
 Needs Node.js 18+, Nginx and PM2 (`npm install -g pm2`).

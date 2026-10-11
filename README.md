@@ -6,6 +6,7 @@ Landing page for the Carlton Wellness Salon franchise, with a lead form that sav
 
 ```
 carlton-landingPage/
+├── api/                Vercel serverless entry point (routes /api/* to the backend)
 ├── frontend/           Landing page and thank-you page (static HTML, CSS, images)
 ├── backend/            Lead API (Node.js + Express) that validates and saves form submissions
 ├── database/           Table setup: Knex migrations + plain SQL for MySQL, PostgreSQL, SQLite
@@ -15,6 +16,7 @@ carlton-landingPage/
 │   └── frontend/
 ├── .gitignore
 ├── package.json        Root scripts (dev, build, test, migrate)
+├── vercel.json         Vercel settings (static frontend + API function)
 └── README.md
 ```
 
@@ -64,7 +66,9 @@ See `database/README.md` for database options.
 
 ## Deploying
 
-Hosting is not decided yet. `deploy/README.md` covers a Linux server (Nginx + PM2) and cPanel shared hosting.
+`deploy/README.md` covers **Vercel** (configured by `vercel.json` and `api/index.js`), a Linux server (Nginx + PM2) and cPanel shared hosting.
+
+On Vercel, connect a Postgres or MySQL database (e.g. Neon from Vercel's Storage tab) before going live. Without one, the form shows "temporarily unavailable" rather than losing leads.
 
 ## Still to add before launch
 
