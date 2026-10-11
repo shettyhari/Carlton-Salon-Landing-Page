@@ -851,20 +851,28 @@ body {
   }
 }
 @media (max-width: 720px) {
+  /* Keep her face clear: no overlays on the photo, label sits below it */
   .hero-visual {
-    aspect-ratio: 4 / 4.6;
+    aspect-ratio: auto;
+    box-shadow: none;
   }
   .hero-visual img {
+    height: auto;
+    aspect-ratio: 4 / 4.6;
     object-position: center 0%;
+    box-shadow: 0 30px 50px -28px rgb(24 26 31 / 0.35);
+  }
+  .hero-counter {
+    display: none;
   }
   .hero-visual__tag {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    padding: 9px 12px;
-    font-size: 0.78rem;
-    line-height: 1.35;
+    position: static;
+    margin-top: 12px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
     border-radius: 12px;
+    box-shadow: none;
+    border: 1px solid var(--line);
   }
   .hero-grid {
     gap: 36px;
