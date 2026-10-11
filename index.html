@@ -839,6 +839,37 @@ body {
 .hero-counter__label {
   color: #f3e6c8;
 }
+.hero-visual__tag strong {
+  font-weight: 600;
+}
+/* Tablet & mobile: show the brand ambassador first, above the headline */
+@media (max-width: 1080px) {
+  .hero-visual {
+    order: -1;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 720px) {
+  .hero-visual {
+    aspect-ratio: 4 / 4.6;
+  }
+  .hero-visual img {
+    object-position: center 0%;
+  }
+  .hero-visual__tag {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 9px 12px;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    border-radius: 12px;
+  }
+  .hero-grid {
+    gap: 36px;
+  }
+}
 .model-card .badge-outline {
   background: #fff0;
   color: var(--orange-deep);
@@ -1173,7 +1204,7 @@ body {
       </div>
       <div class="hero-visual__tag">
         <i class="fa-solid fa-star"></i>
-        Mrunal Thakur, Brand Ambassador, Carlton Wellness Group
+<span><strong>Mrunal Thakur</strong> · Brand Ambassador</span>
       </div>
     </div>
   </div>
