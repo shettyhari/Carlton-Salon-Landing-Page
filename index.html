@@ -1049,6 +1049,9 @@ body {
   color: var(--muted);
   margin: 0.35rem 0 1.1rem;
 }
+.field--full {
+  grid-column: 1 / -1;
+}
 .lead-form__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1268,15 +1271,6 @@ body {
               </select>
             </label>
             <label class="field">
-              <span>Preferred format</span>
-              <select name="format">
-                <option value="">Select format</option>
-                <option>Signature Salon (~₹1.0 Cr)</option>
-                <option>Grande Salon (~₹1.5 Cr)</option>
-                <option>Not sure yet</option>
-              </select>
-            </label>
-            <label class="field">
               <span>Timeline to start</span>
               <select name="timeline">
                 <option value="">Select timeline</option>
@@ -1286,7 +1280,7 @@ body {
                 <option>6+ months</option>
               </select>
             </label>
-            <label class="field">
+            <label class="field field--full">
               <span>Business background</span>
               <select name="background">
                 <option value="">Select background</option>
@@ -1580,7 +1574,7 @@ body {
           console.warn("FORM_ENDPOINT is not set: lead was not sent.", data);
         }
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: "lead_form_submit", format: data.format || "" });
+        window.dataLayer.push({ event: "lead_form_submit" });
         // First name personalises the thank-you page; kept in this tab only, never in the URL
         try { sessionStorage.setItem("carltonLeadName", data.name || ""); } catch (err) {}
         window.location.href = "thank-you.html";
