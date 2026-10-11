@@ -1,0 +1,17 @@
+{
+  "name": "carlton-landingpage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Carlton Wellness Salon franchise landing page with lead capture backend",
+  "scripts": {
+    "install:backend": "npm --prefix backend install",
+    "dev": "npm --prefix backend run dev",
+    "start": "npm --prefix backend start",
+    "migrate": "npm --prefix backend run migrate",
+    "test": "npm --prefix backend test",
+    "build": "node deploy/build-release.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1292,6 +1292,10 @@ body {
               </select>
             </label>
           </div>
+          <!-- Spam trap: hidden from visitors, bots tend to fill it -->
+          <div style="position:absolute; left:-9999px;" aria-hidden="true">
+            <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
+          </div>
           <p class="lead-form__error" id="leadError" hidden></p>
           <button type="submit" class="btn lead-form__submit">Submit application <i class="fa-solid fa-arrow-right"></i></button>
         </form>
@@ -1528,9 +1532,9 @@ body {
 (function () {
   "use strict";
 
-  // TODO: paste the URL that should receive lead form submissions (CRM webhook, Zoho, Google Apps Script, etc.)
-  // Until this is set, the form goes to the thank-you page but the details are NOT sent anywhere.
-  const FORM_ENDPOINT = "";
+  // Lead API (backend/). "/api/leads" works when the backend serves this page or Nginx proxies /api.
+  // If the API is on a different domain, use its full URL, e.g. "https://api.example.com/api/leads".
+  const FORM_ENDPOINT = "/api/leads";
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -1569,7 +1573,10 @@ body {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
           });
-          if (!res.ok) throw new Error("Request failed: " + res.status);
+          if (!res.ok) {
+            const body = await res.json().catch(function () { return {}; });
+            throw new Error(body.error || "Request failed: " + res.status);
+          }
         } else {
           console.warn("FORM_ENDPOINT is not set: lead was not sent.", data);
         }
@@ -1580,7 +1587,9 @@ body {
         window.location.href = "thank-you.html";
         return;
       } catch (err) {
-        leadError.textContent = "Something went wrong. Please try again in a moment.";
+        leadError.textContent = err.message && !/^Request failed|fetch/i.test(err.message)
+          ? err.message
+          : "Something went wrong. Please try again in a moment.";
         leadError.hidden = false;
       } finally {
         submitBtn.disabled = false;
